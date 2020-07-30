@@ -1,0 +1,94 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<html>
+    <head>
+
+        <title>Post User Detail</title>
+    </head>
+
+    <body>
+        <div class="firstdiv">
+            <h1>{{ challenge.title }}</h1>
+
+            <p>{{ challenge.description }}</p>
+
+            {% if challenge.image %}
+                <img src="{{ challenge.image.url }}" width="240">
+            {% endif %}
+            <div class="second">
+
+                <h3>{{ post_users.user }}</h3>
+
+                <textarea readonly id ="copyArea" class="copy" >{{ post_users.answer }}</textarea>
+
+                <p>{{ post_users.date }}</p>
+
+                {% if post_users.voice %}
+                <audio controls preload="auto">
+                    <source src="{{ post_users.voice.url }}" type="audio/mpeg"/>
+                    Your browser does not support the audio element.
+                </audio>
+                {% endif %}
+
+                <div class="fifth">
+                    {% for comment in comments %}
+
+                        <h2>{{ comment.user}}</h2>
+
+                        <textarea readonly id="newPasteArea"> {{ comment.text | slice:":100" }}</textarea>
+                        <p>{{ comment.date }}</p>
+                        <a href="{{ comment.get_absolute_url }}" class="btn btn-primary">View this answer &rarr;</a>
+
+
+
+                    {% endfor %}
+                </div>
+
+                <div class="fourth">
+                    {% if new_answer %}
+                        <div class="cuarta">
+                            <p>Thanks for participating. </p>
+                        </div>
+
+                    {% else %}
+                        <h2>Want to check this answer?</h2>
+                        <input type="submit" id="copy" value="Check answer.">
+                        <div id="myDiv" class="cuarta">
+                                <input type="submit" id="paste" value="Check text.">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                   {{ answer_challenge_form.text }}
+
+
+                                   <input type="submit" value = "Upload"/>
+                                </form>
+
+                            </div>
+
+                            <script src="{% static 'post_user_script.js' %}"></script>
+
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+            </div>
+
+        </div>
+    </body>
+</html>
+
+{% endblock %}

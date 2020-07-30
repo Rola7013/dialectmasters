@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<html>
+    <head>
+        <title>Know more</title>
+    </head>
+    <body>
+        <h1>Know more.</h1>
+        <h1>Username: {{ user.username }}</h1>
+
+        <p> {{ user.usuarios.user_language_learning  }}</p>
+        <p> {{ user.usuarios.user_language_native  }}</p>
+        <p> {{ user.usuarios.second_user_language_learnin  }}</p>
+
+        <div class="primera">
+            <p>Want to add a new language to learn?</p>
+            <input type="submit" id="yBtn" value="Yes.">
+
+
+                {% if second_language %}
+                        <div class="cuarta">
+                            <p>Thanks for adding a new language. </p>
+                        </div>
+
+                {% else %}
+                    <div id="secondDiv">
+                        <form action="." method="POST">
+                            {% csrf_token %}
+                            {{ user_form.as_p }}
+
+                            <input type="submit" value = "Upload"/>
+
+                        </form>
+                        </div>
+                {% endif %}
+
+
+
+            <script src="{% static 'know_script.js' %}"></script>
+        </div>
+    </body>
+</html>
+
+{% endblock %}

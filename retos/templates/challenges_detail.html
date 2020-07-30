@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<html>
+    <head>
+        <title>Challenges Detail</title>
+    </head>
+
+    <body>
+        <div class="firstdiv">
+            <h1>{{ challenge.title }}</h1>
+
+            <p>{{ challenge.description }}</p>
+
+            {% if challenge.image %}
+                <img src="{{ challenge.image.url }}" width="240">
+            {% endif %}
+
+
+                <div class="tercero">
+                    {% if new_post %}
+                    <div class="cuarta">
+                        <p>Thanks for participating. </p>
+                    </div>
+
+                    {% else %}
+                        <div class="cuarta">
+                            <form method="POST" enctype="multipart/form-data">
+                                {{ post_user_form.as_p }}
+                                {% csrf_token %}
+                                {{ post_user_form.media }}
+                               <input type="submit" value = "Upload"/>
+                            </form>
+                        </div>
+
+                    {% endif %}
+                </div>
+
+
+            </div>
+
+        </div>
+    </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'challenge_style.css' %}">
+        <title>Challenges</title>
+    </head>
+
+    <body>
+
+        <header class="masthead">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class=" col-md-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <h3 class=" site-heading my-4 mt-3 text-black"> DialectMaster </h3>
+                        <p>Challenges</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container container-custom">
+        <div class="row">
+            <!-- Blog Entries Column -->
+            <div class="col-md-6 mt-3 left">
+                {% for challenge in challenges %}
+                    {% if challenge.user_language_learning == user.usuarios.user_language_learning %}
+                        <div class="card" style="width: 24rem;">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ challenge.title }}</h2>
+                                <p class="card-text text-muted h6">{{ challenge.date }} | {{ challenge.user_language_learning}} </p>
+                                <p class="card-text">{{ challenge.description | slice:":100" }}</p>
+                                <a href="{% url 'retos:challenges_detail' pk=challenge.pk %}" class="btn btn-primary">Do this challenge &rarr;</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col-md-6 mt-3 left">
+                {% for post_user in post_users %}
+                    {% if post_user.user_language_native == user.usuarios.user_language_native %}
+                        <div class="card" style="width: 24rem;">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ post_user.challenge }}</h2>
+                                <p class="card-text text-muted h6">{{ post_user.date }} | {{ post_user.user }} | {{ post_user.user_language_native }} </p>
+                                <p class="card-text">{{ post_user.answer | slice:":100" }}</p>
+                                <a href="{% url 'retos:post_user_detail' pk=post_user.pk %}" class="btn btn-primary">Check this challenge &rarr;</a>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    </body>
+</html>
+
+{% endblock %}

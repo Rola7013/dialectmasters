@@ -1,0 +1,30 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Login.</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <meta name="google" content="notranslate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous" />
+        <link rel="stylesheet" href="{% static 'log.css' %}">
+    </head>
+
+    <body>
+        <div class="wrapper fadeInDown">
+          <div id="formContent">
+            <form method= "POST">
+                {% csrf_token %}
+                  <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
+                  <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                <button type="submit" class="fadeIn fourth" >Log In.</button>
+            </form>
+            <div id="formFooter">
+              <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+          </div>
+        </div>
+    </body>
+</html>
