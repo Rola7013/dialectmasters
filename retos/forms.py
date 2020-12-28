@@ -51,7 +51,7 @@ class NewCommentForm(ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('body',)
+        fields = ('body', 'parent')
 
         widgets = {
             'body': forms.Textarea(attrs={'class': 'form-control'}),

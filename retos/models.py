@@ -6,6 +6,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
+from stdimage import StdImageField, JPEGField
+
+
+
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
 
 # Create your models here.
 
@@ -42,12 +48,15 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.usuarios.save()
 
+
+
 class Challenge(models.Model):
     user_language_learning = models.ForeignKey(Language_learning, on_delete=models.CASCADE, blank=False, null=True)
     title = models.CharField(max_length=100)
     description = RichTextField()
     date = models.DateField(auto_now_add=True)
-    image = models.ImageField(upload_to='imag_retos', blank=True)
+    image = StdImageField(upload_to='imag_retos',
+                          variations={'thumbnail': {'width': 100, 'height': 75}})
 
 
     def __str__(self):
@@ -82,7 +91,7 @@ class AnswerChallenge(models.Model):
 class Comment(MPTTModel):
     article = models.ForeignKey(AnswerChallenge, on_delete=models.CASCADE, related_name='comments' , null=True, blank=True)
     user = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
-    body = RichTextField(null=True, blank=True)
+    body = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     status = models.BooleanField(default=True)

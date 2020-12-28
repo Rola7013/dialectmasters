@@ -24,8 +24,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dialectmaster/challenges/', include('retos.urls')),
+    path('', include('api.urls')),
     path('registration/', create_user, name='registro'),
     path('accounts/login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', logout_then_login, name='logout'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

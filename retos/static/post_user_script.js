@@ -1,3 +1,5 @@
+$('textarea').autoResize();
+
 var button = document.getElementById("copy");
 var myDiv = document.getElementById("myDiv");
 

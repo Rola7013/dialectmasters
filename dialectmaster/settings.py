@@ -26,12 +26,13 @@ SECRET_KEY = 'ps@#v_3sl_ijefgrpua(5oqv@(1xt@e^+bl)l^a+7kqs!!mnin'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.15.15', 'localhost', '127.0.0.1' ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'api',
     'retos',
     'mptt',
     'widget_tweaks',
@@ -44,8 +45,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'rest_framework',
+    'djoser',
+    'rest_framework.authtoken',
+    'stdimage',
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 COMMENTS_APP = 'django_comments_tree'
 

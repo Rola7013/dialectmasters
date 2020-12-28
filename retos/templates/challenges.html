@@ -12,7 +12,7 @@
 
         <header class="masthead">
         <div class="overlay"></div>
-        <div class="container">
+
             <div class="row">
                 <div class=" col-md-8 col-md-10 mx-auto">
                     <div class="site-heading">
@@ -21,19 +21,19 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </header>
-    <div class="container container-custom">
+
         <div class="row">
             <!-- Blog Entries Column -->
             <div class="col-md-6 mt-3 left">
                 {% for challenge in challenges %}
-                    {% if challenge.user_language_learning == user.usuarios.user_language_learning %}
+                    {% if challenge.user_language_learning == user.usuarios.user_language_learning or challenge.user_language_learning == user.usuarios.second_user_language_learnin %}
                         <div class="card" style="width: 24rem;">
                             <div class="card-body">
                                 <h2 class="card-title">{{ challenge.title }}</h2>
                                 <p class="card-text text-muted h6">{{ challenge.date }} | {{ challenge.user_language_learning}} </p>
-                                <p class="card-text">{{ challenge.description | slice:":100" }}</p>
+                                <p class="card-text">{{ challenge.description | slice:":100" | safe}}</p>
                                 <a href="{% url 'retos:challenges_detail' pk=challenge.pk %}" class="btn btn-primary">Do this challenge &rarr;</a>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <div class="card-body">
                                 <h2 class="card-title">{{ post_user.challenge }}</h2>
                                 <p class="card-text text-muted h6">{{ post_user.date }} | {{ post_user.user }} | {{ post_user.user_language_native }} </p>
-                                <p class="card-text">{{ post_user.answer | slice:":100" }}</p>
+                                <p class="card-text">{{ post_user.answer | slice:":100" | safe}}</p>
                                 <a href="{% url 'retos:post_user_detail' pk=post_user.pk %}" class="btn btn-primary">Check this challenge &rarr;</a>
                             </div>
 
@@ -60,7 +60,7 @@
 
         </div>
 
-    </div>
+
 
 
     </body>

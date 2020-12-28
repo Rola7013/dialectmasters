@@ -8,9 +8,9 @@
 
     <body>
         <div class="firstdiv">
-            <h1>{{ challenge.title }}</h1>
+            <h1>{{ challenge.title | safe}}</h1>
 
-            <p>{{ challenge.description }}</p>
+            <p>{{ challenge.description | safe}}</p>
 
             {% if challenge.image %}
                 <img src="{{ challenge.image.url }}" width="240">
